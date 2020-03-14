@@ -1,28 +1,46 @@
 <template>
-  <div id="app">
-    <img alt="Vue logo" src="./assets/logo.png">
-    <HelloWorld msg="Welcome to Your Vue.js App"/>
+  <div id="player">
+    <h2 class="title">牧宇音乐</h2>
+    <div class="search" @keyup.13="search">
+      <input type="text" v-model="iptVal" />
+      <button @click="search">
+        <span class="iconfont icon-search"></span>
+      </button>
+    </div>
+    <div class="tab-wrapper">
+      <!-- 对应的内容区域 -->
+      <div class="tab-content">
+        <router-view></router-view>
+      </div>
+    </div>
   </div>
 </template>
 
 <script>
-import HelloWorld from './components/HelloWorld.vue'
-
 export default {
-  name: 'App',
-  components: {
-    HelloWorld
+  data() {
+    return {
+      iptVal: "陈奕迅"
+    };
+  },
+  methods: {
+    search() {
+      if (this.iptVal.trim() != "") {
+        this.$router.push("/songs?id=" + this.iptVal);
+      }else{
+        alert('不能为空哦!')
+      }
+    }
   }
-}
+};
 </script>
 
 <style>
-#app {
-  font-family: Avenir, Helvetica, Arial, sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-  text-align: center;
-  color: #2c3e50;
-  margin-top: 60px;
+@import url("./assets/css/iconfont.css");
+@import url("./assets/css/index.css");
+body {
+  background: url("./assets/img/timg.jpg") no-repeat center;
+  background-size: 100% 100%;
+  background-attachment: fixed;
 }
 </style>
